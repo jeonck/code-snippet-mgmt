@@ -69,22 +69,24 @@ function App() {
             >
               All ({snippets.length})
             </button>
-            {Object.entries(snippetCategories).map(([key, label]) => {
-              const count = snippets.filter(s => s.category === key).length;
-              return (
-                <button
-                  key={key}
-                  onClick={() => setSelectedCategory(key)}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    selectedCategory === key
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-white/10 text-white/80 hover:bg-white/20'
-                  }`}
-                >
-                  {label} ({count})
-                </button>
-              );
-            })}
+            {Object.entries(snippetCategories)
+              .filter(([key]) => key !== 'all') // 'all' 카테고리 제외
+              .map(([key, label]) => {
+                const count = snippets.filter(s => s.category === key).length;
+                return (
+                  <button
+                    key={key}
+                    onClick={() => setSelectedCategory(key)}
+                    className={`px-4 py-2 rounded-lg transition-colors ${
+                      selectedCategory === key
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-white/10 text-white/80 hover:bg-white/20'
+                    }`}
+                  >
+                    {label} ({count})
+                  </button>
+                );
+              })}
           </div>
         </div>
 
