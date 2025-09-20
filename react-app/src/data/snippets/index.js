@@ -3,7 +3,6 @@ export const snippetCategories = {
   javascript: "JavaScript",
   react: "React",
   "spring-boot": "Spring Boot",
-  java: "Java",
   svelte: "Svelte",
   python: "Python"
 };
