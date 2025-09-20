@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { snippetCategories, loadAllSnippets, loadSnippetsByCategory, getSnippetCounts } from './data/snippets'
+import { snippetCategories, loadAllSnippets, loadSnippetsByCategory, getSnippetCounts } from './data/snippets/index.js'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
