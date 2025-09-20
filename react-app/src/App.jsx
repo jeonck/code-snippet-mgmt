@@ -184,7 +184,7 @@ window.addEventListener('click', (event) => {
                 >
                   {copiedId === snippet.id ? 'Copied!' : 'Copy'}
                 </button>
-                <pre className="text-sm text-green-300 overflow-x-auto p-4 pr-20">
+                <pre className="text-sm text-green-300 overflow-x-auto p-4 pr-20 pt-8">
                   <code>{snippet.code}</code>
                 </pre>
               </div>
