@@ -177,16 +177,16 @@ window.addEventListener('click', (event) => {
                   {snippet.language}
                 </span>
               </div>
-              <div className="relative bg-gray-900/50 rounded-lg p-4 mb-4">
-                <pre className="text-sm text-green-300 overflow-x-auto">
-                  <code>{snippet.code}</code>
-                </pre>
+              <div className="relative bg-gray-900/50 rounded-lg mb-4">
                 <button
                   onClick={() => copyToClipboard(snippet.code, snippet.id)}
-                  className="absolute top-2 right-2 px-3 py-1 bg-blue-500/20 hover:bg-blue-500/40 text-blue-200 rounded text-xs transition-colors"
+                  className="absolute top-2 right-2 px-3 py-1 bg-blue-500/20 hover:bg-blue-500/40 text-blue-200 rounded text-xs transition-colors z-10"
                 >
                   {copiedId === snippet.id ? 'Copied!' : 'Copy'}
                 </button>
+                <pre className="text-sm text-green-300 overflow-x-auto p-4 pr-20">
+                  <code>{snippet.code}</code>
+                </pre>
               </div>
               <div className="flex flex-wrap gap-2">
                 {snippet.tags.map(tag => (
