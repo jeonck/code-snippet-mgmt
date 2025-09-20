@@ -16,11 +16,19 @@ const categoryImports = {
   python: () => import('./python.js').then(m => m.pythonSnippets)
 };
 
-// Load all snippets
+// Load all snippets with auto-generated IDs
 export async function loadAllSnippets() {
   try {
     const snippetArrays = await Promise.all(
-      Object.values(categoryImports).map(importFn => importFn())
+      Object.entries(categoryImports).map(async ([category, importFn]) => {
+        const snippets = await importFn();
+        // Auto-generate unique IDs: category-index
+        return snippets.map((snippet, index) => ({
+          ...snippet,
+          id: `${category}-${index + 1}`,
+          originalId: snippet.id // Keep original ID for reference
+        }));
+      })
     );
 
     return snippetArrays.flat();
@@ -30,7 +38,7 @@ export async function loadAllSnippets() {
   }
 }
 
-// Load snippets by category
+// Load snippets by category with auto-generated IDs
 export async function loadSnippetsByCategory(category) {
   try {
     if (category === 'all') {
@@ -43,7 +51,13 @@ export async function loadSnippetsByCategory(category) {
       return [];
     }
 
-    return await importFn();
+    const snippets = await importFn();
+    // Auto-generate unique IDs for single category
+    return snippets.map((snippet, index) => ({
+      ...snippet,
+      id: `${category}-${index + 1}`,
+      originalId: snippet.id // Keep original ID for reference
+    }));
   } catch (error) {
     console.error(`Error loading ${category} snippets:`, error);
     return [];
