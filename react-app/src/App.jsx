@@ -63,10 +63,19 @@ function App() {
       }
     };
 
-    if (Object.keys(categoryCounts).length > 0) {
-      loadCategorySnippets();
+    loadCategorySnippets();
+  }, [selectedCategory]);
+
+  // Refresh counts when snippets change
+  useEffect(() => {
+    if (snippets.length > 0 && selectedCategory === 'all') {
+      const refreshCounts = async () => {
+        const counts = await getSnippetCounts();
+        setCategoryCounts(counts);
+      };
+      refreshCounts();
     }
-  }, [selectedCategory, categoryCounts]);
+  }, [snippets, selectedCategory]);
 
   // ESC key listener for modal
   useEffect(() => {
