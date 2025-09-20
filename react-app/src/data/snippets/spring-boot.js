@@ -1,6 +1,5 @@
 export const springBootSnippets = [
   {
-    id: 8,
     title: "Spring Boot REST Controller",
     language: "java",
     category: "spring-boot",
@@ -51,7 +50,6 @@ public class UserController {
     tags: ["spring-boot", "rest", "controller", "crud", "java"]
   },
   {
-    id: 9,
     title: "Spring Boot Service Layer",
     language: "java",
     category: "spring-boot",
@@ -107,7 +105,6 @@ public class UserService {
     tags: ["spring-boot", "service", "transactional", "java"]
   },
   {
-    id: 10,
     title: "Spring Boot JPA Repository",
     language: "java",
     category: "spring-boot",
@@ -143,7 +140,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     tags: ["spring-boot", "jpa", "repository", "query", "java"]
   },
   {
-    id: 11,
     title: "Spring Boot Entity with Validation",
     language: "java",
     category: "spring-boot",
@@ -210,7 +206,6 @@ public class User {
     tags: ["spring-boot", "entity", "jpa", "validation", "java"]
   },
   {
-    id: 12,
     title: "Global Exception Handler",
     language: "java",
     category: "spring-boot",
@@ -281,7 +276,6 @@ record ErrorResponse(
     tags: ["spring-boot", "exception", "handler", "validation", "java"]
   },
   {
-    id: 13,
     title: "Spring Boot Configuration",
     language: "java",
     category: "spring-boot",
@@ -336,7 +330,6 @@ public class WebConfig implements WebMvcConfigurer {
     tags: ["spring-boot", "configuration", "cors", "beans", "java"]
   },
   {
-    id: 14,
     title: "Spring Boot Application Properties",
     language: "yaml",
     category: "spring-boot",
@@ -389,7 +382,6 @@ management:
     tags: ["spring-boot", "configuration", "yaml", "properties"]
   },
   {
-    id: 20,
     title: "Spring Boot Maven POM (Complete Setup)",
     language: "xml",
     category: "spring-boot",

@@ -1,6 +1,5 @@
 export const pythonSnippets = [
   {
-    id: 17,
     title: "Python FastAPI REST Endpoint",
     language: "python",
     category: "python",
@@ -95,7 +94,6 @@ if __name__ == "__main__":
     tags: ["python", "fastapi", "rest", "api", "crud"]
   },
   {
-    id: 18,
     title: "Python Data Processing with Pandas",
     language: "python",
     category: "python",
@@ -172,7 +170,6 @@ if __name__ == "__main__":
     tags: ["python", "pandas", "data-analysis", "etl"]
   },
   {
-    id: 19,
     title: "Python Async/Await Pattern",
     language: "python",
     category: "python",

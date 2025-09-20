@@ -1,6 +1,5 @@
 export const svelteSnippets = [
   {
-    id: 15,
     title: "Svelte Component with State",
     language: "svelte",
     category: "svelte",
@@ -74,7 +73,6 @@ export const svelteSnippets = [
     tags: ["svelte", "component", "state", "reactivity"]
   },
   {
-    id: 16,
     title: "Svelte Store Management",
     language: "javascript",
     category: "svelte",

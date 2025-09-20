@@ -1,6 +1,5 @@
 export const reactSnippets = [
   {
-    id: 1,
     title: "React Component Template",
     language: "jsx",
     category: "react",

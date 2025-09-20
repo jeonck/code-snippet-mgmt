@@ -1,4 +1,4 @@
-const e=[{id:8,title:"Spring Boot REST Controller",language:"java",category:"spring-boot",code:`@RestController
+const e=[{title:"Spring Boot REST Controller",language:"java",category:"spring-boot",code:`@RestController
 @RequestMapping("/api/users")
 @CrossOrigin(origins = "*")
 public class UserController {
@@ -41,7 +41,7 @@ public class UserController {
         }
         return ResponseEntity.notFound().build();
     }
-}`,tags:["spring-boot","rest","controller","crud","java"]},{id:9,title:"Spring Boot Service Layer",language:"java",category:"spring-boot",code:`@Service
+}`,tags:["spring-boot","rest","controller","crud","java"]},{title:"Spring Boot Service Layer",language:"java",category:"spring-boot",code:`@Service
 @Transactional
 public class UserService {
 
@@ -89,7 +89,7 @@ public class UserService {
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
-}`,tags:["spring-boot","service","transactional","java"]},{id:10,title:"Spring Boot JPA Repository",language:"java",category:"spring-boot",code:`@Repository
+}`,tags:["spring-boot","service","transactional","java"]},{title:"Spring Boot JPA Repository",language:"java",category:"spring-boot",code:`@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
     // Query methods
@@ -117,7 +117,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // Pagination and sorting
     Page<User> findByActiveTrue(Pageable pageable);
-}`,tags:["spring-boot","jpa","repository","query","java"]},{id:11,title:"Spring Boot Entity with Validation",language:"java",category:"spring-boot",code:`@Entity
+}`,tags:["spring-boot","jpa","repository","query","java"]},{title:"Spring Boot Entity with Validation",language:"java",category:"spring-boot",code:`@Entity
 @Table(name = "users")
 public class User {
 
@@ -176,7 +176,7 @@ public class User {
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
-}`,tags:["spring-boot","entity","jpa","validation","java"]},{id:12,title:"Global Exception Handler",language:"java",category:"spring-boot",code:`@RestControllerAdvice
+}`,tags:["spring-boot","entity","jpa","validation","java"]},{title:"Global Exception Handler",language:"java",category:"spring-boot",code:`@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
@@ -239,7 +239,7 @@ record ErrorResponse(
     String error,
     String message,
     LocalDateTime timestamp
-) {}`,tags:["spring-boot","exception","handler","validation","java"]},{id:13,title:"Spring Boot Configuration",language:"java",category:"spring-boot",code:`@Configuration
+) {}`,tags:["spring-boot","exception","handler","validation","java"]},{title:"Spring Boot Configuration",language:"java",category:"spring-boot",code:`@Configuration
 @EnableWebMvc
 @EnableJpaRepositories(basePackages = "com.example.repository")
 public class WebConfig implements WebMvcConfigurer {
@@ -286,7 +286,7 @@ public class WebConfig implements WebMvcConfigurer {
             }
         };
     }
-}`,tags:["spring-boot","configuration","cors","beans","java"]},{id:14,title:"Spring Boot Application Properties",language:"yaml",category:"spring-boot",code:`# application.yml
+}`,tags:["spring-boot","configuration","cors","beans","java"]},{title:"Spring Boot Application Properties",language:"yaml",category:"spring-boot",code:`# application.yml
 spring:
   application:
     name: my-spring-app
@@ -331,7 +331,7 @@ management:
         include: health,info,metrics
   endpoint:
     health:
-      show-details: always`,tags:["spring-boot","configuration","yaml","properties"]},{id:20,title:"Spring Boot Maven POM (Complete Setup)",language:"xml",category:"spring-boot",code:`<?xml version="1.0" encoding="UTF-8"?>
+      show-details: always`,tags:["spring-boot","configuration","yaml","properties"]},{title:"Spring Boot Maven POM (Complete Setup)",language:"xml",category:"spring-boot",code:`<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0

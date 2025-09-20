@@ -1,4 +1,4 @@
-const e=[{id:2,title:"Async Data Loader with Promise.all",language:"javascript",category:"javascript",code:`async function loadAllGuides() {
+const e=[{title:"Async Data Loader with Promise.all",language:"javascript",category:"javascript",code:`async function loadAllGuides() {
   try {
     const response = await fetch('data/guides.json');
     const fileList = await response.json();
@@ -12,7 +12,7 @@ const e=[{id:2,title:"Async Data Loader with Promise.all",language:"javascript",
   } catch (error) {
     console.error('Error loading guides:', error);
   }
-}`,tags:["javascript","async","fetch","promise"]},{id:3,title:"Copy to Clipboard with Feedback",language:"javascript",category:"javascript",code:`function copyToClipboard(text, button) {
+}`,tags:["javascript","async","fetch","promise"]},{title:"Copy to Clipboard with Feedback",language:"javascript",category:"javascript",code:`function copyToClipboard(text, button) {
   navigator.clipboard.writeText(text).then(() => {
     button.textContent = 'Copied!';
     setTimeout(() => {
@@ -24,7 +24,7 @@ const e=[{id:2,title:"Async Data Loader with Promise.all",language:"javascript",
       button.textContent = 'Copy';
     }, 2000);
   });
-}`,tags:["javascript","clipboard","ui","feedback"]},{id:4,title:"Dynamic Search Filter",language:"javascript",category:"javascript",code:`// Search filter with event listener
+}`,tags:["javascript","clipboard","ui","feedback"]},{title:"Dynamic Search Filter",language:"javascript",category:"javascript",code:`// Search filter with event listener
 searchInput.addEventListener('input', () => {
   const searchTerm = searchInput.value.toLowerCase();
   const filteredGuides = guides.filter(guide => {
@@ -32,7 +32,7 @@ searchInput.addEventListener('input', () => {
            guide.description.toLowerCase().includes(searchTerm);
   });
   renderGuides(filteredGuides);
-});`,tags:["javascript","search","filter","event"]},{id:5,title:"Dynamic DOM Element Creation",language:"javascript",category:"javascript",code:`function renderGuides(guidesToRender) {
+});`,tags:["javascript","search","filter","event"]},{title:"Dynamic DOM Element Creation",language:"javascript",category:"javascript",code:`function renderGuides(guidesToRender) {
   guidesContainer.innerHTML = '';
   guidesToRender.forEach(guide => {
     const guideElement = document.createElement('div');
@@ -44,7 +44,7 @@ searchInput.addEventListener('input', () => {
     guideElement.addEventListener('click', () => openModal(guide));
     guidesContainer.appendChild(guideElement);
   });
-}`,tags:["javascript","dom","template","dynamic"]},{id:6,title:"Modal Window with Event Handlers",language:"javascript",category:"javascript",code:`// Modal open/close functionality
+}`,tags:["javascript","dom","template","dynamic"]},{title:"Modal Window with Event Handlers",language:"javascript",category:"javascript",code:`// Modal open/close functionality
 function openModal(guide) {
   modalTitle.textContent = guide.title;
   modal.style.display = 'block';
@@ -58,7 +58,7 @@ window.addEventListener('click', (event) => {
   if (event.target == modal) {
     modal.style.display = 'none';
   }
-});`,tags:["javascript","modal","ui","events"]},{id:7,title:"DOMContentLoaded Event Pattern",language:"javascript",category:"javascript",code:`document.addEventListener('DOMContentLoaded', () => {
+});`,tags:["javascript","modal","ui","events"]},{title:"DOMContentLoaded Event Pattern",language:"javascript",category:"javascript",code:`document.addEventListener('DOMContentLoaded', () => {
   // Initialize DOM elements
   const guidesContainer = document.getElementById('guides-container');
   const searchInput = document.getElementById('search');

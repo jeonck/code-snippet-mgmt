@@ -1,6 +1,5 @@
 export const javascriptSnippets = [
   {
-    id: 2,
     title: "Async Data Loader with Promise.all",
     language: "javascript",
     category: "javascript",
@@ -22,7 +21,6 @@ export const javascriptSnippets = [
     tags: ["javascript", "async", "fetch", "promise"]
   },
   {
-    id: 3,
     title: "Copy to Clipboard with Feedback",
     language: "javascript",
     category: "javascript",
@@ -42,7 +40,6 @@ export const javascriptSnippets = [
     tags: ["javascript", "clipboard", "ui", "feedback"]
   },
   {
-    id: 4,
     title: "Dynamic Search Filter",
     language: "javascript",
     category: "javascript",
@@ -58,7 +55,6 @@ searchInput.addEventListener('input', () => {
     tags: ["javascript", "search", "filter", "event"]
   },
   {
-    id: 5,
     title: "Dynamic DOM Element Creation",
     language: "javascript",
     category: "javascript",
@@ -78,7 +74,6 @@ searchInput.addEventListener('input', () => {
     tags: ["javascript", "dom", "template", "dynamic"]
   },
   {
-    id: 6,
     title: "Modal Window with Event Handlers",
     language: "javascript",
     category: "javascript",
@@ -100,7 +95,6 @@ window.addEventListener('click', (event) => {
     tags: ["javascript", "modal", "ui", "events"]
   },
   {
-    id: 7,
     title: "DOMContentLoaded Event Pattern",
     language: "javascript",
     category: "javascript",

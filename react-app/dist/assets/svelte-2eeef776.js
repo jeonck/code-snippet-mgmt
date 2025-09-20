@@ -1,4 +1,4 @@
-const e=[{id:15,title:"Svelte Component with State",language:"svelte",category:"svelte",code:`<script>
+const e=[{title:"Svelte Component with State",language:"svelte",category:"svelte",code:`<script>
   import { onMount } from 'svelte';
 
   let count = 0;
@@ -64,7 +64,7 @@ const e=[{id:15,title:"Svelte Component with State",language:"svelte",category:"
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-</style>`,tags:["svelte","component","state","reactivity"]},{id:16,title:"Svelte Store Management",language:"javascript",category:"svelte",code:`// stores.js
+</style>`,tags:["svelte","component","state","reactivity"]},{title:"Svelte Store Management",language:"javascript",category:"svelte",code:`// stores.js
 import { writable, derived, readable } from 'svelte/store';
 
 // Writable store

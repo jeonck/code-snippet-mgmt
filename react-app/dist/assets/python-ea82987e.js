@@ -1,4 +1,4 @@
-const e=[{id:17,title:"Python FastAPI REST Endpoint",language:"python",category:"python",code:`from fastapi import FastAPI, HTTPException, Depends
+const e=[{title:"Python FastAPI REST Endpoint",language:"python",category:"python",code:`from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from typing import List, Optional
@@ -85,7 +85,7 @@ async def delete_user(user_id: int, db: Session = Depends(get_db)):
     return {"message": "User deleted successfully"}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)`,tags:["python","fastapi","rest","api","crud"]},{id:18,title:"Python Data Processing with Pandas",language:"python",category:"python",code:`import pandas as pd
+    uvicorn.run(app, host="0.0.0.0", port=8000)`,tags:["python","fastapi","rest","api","crud"]},{title:"Python Data Processing with Pandas",language:"python",category:"python",code:`import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 
@@ -154,7 +154,7 @@ if __name__ == "__main__":
 
     # Export results
     sales_df.to_csv('processed_sales.csv', index=False)
-    print("Data processing completed!")`,tags:["python","pandas","data-analysis","etl"]},{id:19,title:"Python Async/Await Pattern",language:"python",category:"python",code:`import asyncio
+    print("Data processing completed!")`,tags:["python","pandas","data-analysis","etl"]},{title:"Python Async/Await Pattern",language:"python",category:"python",code:`import asyncio
 import aiohttp
 import time
 from typing import List, Dict, Any
