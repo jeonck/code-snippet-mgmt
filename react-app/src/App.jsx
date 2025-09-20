@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [copiedId, setCopiedId] = useState(null);
+  const [selectedSnippet, setSelectedSnippet] = useState(null);
   const [snippets, setSnippets] = useState([
     {
       id: 1,
@@ -151,6 +152,20 @@ window.addEventListener('click', (event) => {
     }
   };
 
+  // ESC key listener for modal
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') {
+        setSelectedSnippet(null);
+      }
+    };
+
+    if (selectedSnippet) {
+      document.addEventListener('keydown', handleEsc);
+      return () => document.removeEventListener('keydown', handleEsc);
+    }
+  }, [selectedSnippet]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 p-8">
       <div className="max-w-6xl mx-auto">
@@ -170,30 +185,34 @@ window.addEventListener('click', (event) => {
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredSnippets.map(snippet => (
-            <div key={snippet.id} className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 shadow-xl">
+            <div
+              key={snippet.id}
+              onClick={() => setSelectedSnippet(snippet)}
+              className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 shadow-xl cursor-pointer hover:bg-white/15 transition-colors"
+            >
               <div className="flex justify-between items-start mb-3">
                 <h3 className="text-xl font-semibold text-white">{snippet.title}</h3>
                 <span className="px-2 py-1 bg-gray-700/50 text-gray-300 rounded text-xs">
                   {snippet.language}
                 </span>
               </div>
-              <div className="relative bg-gray-900/50 rounded-lg mb-4">
-                <button
-                  onClick={() => copyToClipboard(snippet.code, snippet.id)}
-                  className="absolute top-2 right-2 px-3 py-1 bg-blue-500/20 hover:bg-blue-500/40 text-blue-200 rounded text-xs transition-colors z-10"
-                >
-                  {copiedId === snippet.id ? 'Copied!' : 'Copy'}
-                </button>
-                <pre className="text-sm text-green-300 overflow-x-auto p-4 pr-20 pt-8">
-                  <code>{snippet.code}</code>
+              <div className="bg-gray-900/50 rounded-lg p-4 mb-4">
+                <pre className="text-sm text-green-300 overflow-hidden">
+                  <code className="line-clamp-3">
+                    {snippet.code.split('\n').slice(0, 3).join('\n')}
+                    {snippet.code.split('\n').length > 3 && '\n...'}
+                  </code>
                 </pre>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-3">
                 {snippet.tags.map(tag => (
                   <span key={tag} className="px-2 py-1 bg-blue-500/30 text-blue-200 rounded-full text-xs">
                     {tag}
                   </span>
                 ))}
+              </div>
+              <div className="text-center">
+                <span className="text-blue-300 text-sm">Click to view full code →</span>
               </div>
             </div>
           ))}
@@ -212,6 +231,56 @@ window.addEventListener('click', (event) => {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {selectedSnippet && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+          onClick={() => setSelectedSnippet(null)}
+        >
+          <div
+            className="bg-gray-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-white/20"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center p-6 border-b border-white/20">
+              <div>
+                <h2 className="text-2xl font-bold text-white">{selectedSnippet.title}</h2>
+                <span className="px-2 py-1 bg-gray-700/50 text-gray-300 rounded text-xs">
+                  {selectedSnippet.language}
+                </span>
+              </div>
+              <button
+                onClick={() => setSelectedSnippet(null)}
+                className="text-white/60 hover:text-white text-2xl"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="p-6 max-h-[calc(90vh-140px)] overflow-auto">
+              <div className="relative bg-gray-800 rounded-lg">
+                <button
+                  onClick={() => copyToClipboard(selectedSnippet.code, selectedSnippet.id)}
+                  className="absolute top-4 right-4 px-4 py-2 bg-blue-500/20 hover:bg-blue-500/40 text-blue-200 rounded transition-colors z-10"
+                >
+                  {copiedId === selectedSnippet.id ? 'Copied!' : 'Copy Code'}
+                </button>
+                <pre className="text-sm text-green-300 overflow-x-auto p-6 pr-24">
+                  <code>{selectedSnippet.code}</code>
+                </pre>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mt-4">
+                {selectedSnippet.tags.map(tag => (
+                  <span key={tag} className="px-3 py-1 bg-blue-500/30 text-blue-200 rounded-full text-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
