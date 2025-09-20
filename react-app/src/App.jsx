@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
-import { snippets as snippetData, snippetCategories } from './data/snippets'
+import { snippetCategories, loadAllSnippets, loadSnippetsByCategory, getSnippetCounts } from './data/snippets'
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [copiedId, setCopiedId] = useState(null);
   const [selectedSnippet, setSelectedSnippet] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [snippets] = useState(snippetData);
+  const [snippets, setSnippets] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [categoryCounts, setCategoryCounts] = useState({});
 
   const filteredSnippets = snippets.filter(snippet => {
     const matchesSearch = snippet.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -27,6 +29,44 @@ function App() {
       console.error('Failed to copy:', err);
     }
   };
+
+  // Load snippets and counts on mount
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const [allSnippets, counts] = await Promise.all([
+          loadAllSnippets(),
+          getSnippetCounts()
+        ]);
+        setSnippets(allSnippets);
+        setCategoryCounts(counts);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  // Load snippets when category changes
+  useEffect(() => {
+    const loadCategorySnippets = async () => {
+      if (selectedCategory === 'all') {
+        const allSnippets = await loadAllSnippets();
+        setSnippets(allSnippets);
+      } else {
+        const categorySnippets = await loadSnippetsByCategory(selectedCategory);
+        setSnippets(categorySnippets);
+      }
+    };
+
+    if (Object.keys(categoryCounts).length > 0) {
+      loadCategorySnippets();
+    }
+  }, [selectedCategory, categoryCounts]);
 
   // ESC key listener for modal
   useEffect(() => {
@@ -67,12 +107,12 @@ function App() {
                   : 'bg-white/10 text-white/80 hover:bg-white/20'
               }`}
             >
-              All ({snippets.length})
+              All ({Object.values(categoryCounts).reduce((sum, count) => sum + count, 0)})
             </button>
             {Object.entries(snippetCategories)
               .filter(([key]) => key !== 'all') // 'all' 카테고리 제외
               .map(([key, label]) => {
-                const count = snippets.filter(s => s.category === key).length;
+                const count = categoryCounts[key] || 0;
                 return (
                   <button
                     key={key}
@@ -90,8 +130,14 @@ function App() {
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredSnippets.map(snippet => (
+        {loading ? (
+          <div className="text-center text-white py-12">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+            <p className="mt-4">Loading snippets...</p>
+          </div>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {filteredSnippets.map(snippet => (
             <div
               key={snippet.id}
               onClick={() => setSelectedSnippet(snippet)}
@@ -122,21 +168,24 @@ function App() {
                 <span className="text-blue-300 text-sm">Click to view full code →</span>
               </div>
             </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
-        {filteredSnippets.length === 0 && (
+        {!loading && filteredSnippets.length === 0 && (
           <div className="text-center text-white/60 py-12">
             <p className="text-lg">No snippets found matching "{searchTerm}"</p>
             <p className="text-sm mt-2">Try adjusting your search terms</p>
           </div>
         )}
 
-        <div className="mt-12 text-center">
-          <div className="text-white/80 text-sm">
-            <p>Total: {snippets.length} snippets | Showing: {filteredSnippets.length}</p>
+        {!loading && (
+          <div className="mt-12 text-center">
+            <div className="text-white/80 text-sm">
+              <p>Total: {Object.values(categoryCounts).reduce((sum, count) => sum + count, 0)} snippets | Showing: {filteredSnippets.length}</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Modal */}
